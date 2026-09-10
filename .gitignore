@@ -40,3 +40,4 @@ venv/
 *.pptx
 demo.py
 .omc/
+*.tar.gz
