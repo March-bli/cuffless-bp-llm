@@ -1,0 +1,26 @@
+\chapter{Feature List}
+\label{app:features}
+
+The complete set of 55 PPG features used in this thesis is grouped into four categories, plus two demographic features.
+
+\section{Time-Domain Morphological Features (16)}
+
+Systolic amplitude mean and standard deviation; diastolic amplitude mean; pulse amplitude mean and standard deviation; pulse interval mean and standard deviation; heart rate; upstroke time mean and standard deviation; diastolic time mean; pulse widths at 25\%, 50\% and 75\% of pulse height; augmentation index (AIx); stiffness index (SI).
+
+\section{Derivative Morphology --- VPG and APG (18)}
+
+Velocity plethysmogram (VPG) statistics: maximum, minimum, standard deviation, and mean absolute amplitude.
+
+Acceleration plethysmogram (APG) wave amplitudes: a--e wave means and standard deviations; and the four ratios b/a, c/a, d/a, and e/a.
+
+\section{Global Statistical Features (14)}
+
+Mean, standard deviation, median, skewness, kurtosis, minimum, maximum, peak-to-peak amplitude, root-mean-square, percentiles (p5/p25/p75/p95), and histogram entropy.
+
+\section{Frequency-Domain Features (7)}
+
+Spectral energy, heart-rate band power, heart-rate band ratio, dominant frequency, dominant power, spectral centroid, and LF/HF ratio.
+
+\section{Demographic Features (2)}
+
+Age and gender, included for all methods (the zero-shot baseline additionally uses them as conditioning information).

@@ -1,0 +1,29 @@
+\chapter{Conclusion and Future Work}
+\label{ch:conclusion}
+
+\section{Summary}
+
+This thesis addressed the cross-subject generalisation challenge in cuffless BP estimation through LLM-based personalisation. Four stages were completed: (1) problem diagnosis via a 70/20/10 subject-level benchmark on complete PulseDB (5,159 subjects), where a global XGBoost trained on 3,611 subjects still failed every BHS grade (15.7/8.89); (2) method proposal --- LLM few-shot personalised calibration requiring no fine-tuning; (3) experimental validation, where semantic description with K=20 achieved SBP 5.52 / DBP 2.93, with DBP meeting BHS Grade A and SBP meeting Grade B; and (4) theoretical deepening, revealing that the LLM's value lies in in-context learning and that semantic abstraction helps most when calibration data is scarce.
+
+\section{Contributions}
+
+\begin{enumerate}
+  \item A complete-PulseDB benchmark (5,159 subject records, 5.23M segments) with a strict 70/20/10 subject-level split and BHS evaluation;
+  \item An LLM few-shot personalised calibration method combining semantic description, achieving BHS Grade A DBP and Grade B SBP without any fine-tuning;
+  \item The finding that both LLM numeric few-shot (5.99/3.32) and semantic description (5.52/2.93) outperform conventional ML bias correction (7.79/4.18) on a 517-subject test set;
+  \item The insight that semantic abstraction's advantage is largest when calibration data is scarce (4.5 mmHg at K=3, closing to 0.5 mmHg at K=20);
+  \item An empirical boundary for semantic abstraction: quantitative anchors must be retained (purely qualitative summaries collapse to 25.0/23.5).
+\end{enumerate}
+
+\section{Limitations and Future Work}
+
+\begin{enumerate}
+  \item Calibration samples require cuff measurements; future work should reduce this cost through opportunistic calibration, guided by the observation that K=10 already approaches convergence;
+  \item On-device deployment requires model quantisation;
+  \item Sensor-language representations could be learned automatically rather than via hand-crafted rules;
+  \item Calibration expiry and adaptive updating need study, as well as transfer to healthy ambulatory populations beyond the ICU-derived PulseDB data.
+\end{enumerate}
+
+\section{Closing Remarks}
+
+This work shows that the bottleneck of cuffless BP estimation is shifting from ``model'' to ``individual''. Combining LLMs with semantic description and few-shot personalisation achieves clinical-grade accuracy with no fine-tuning and a modest calibration burden. The deeper insight --- that LLMs should \emph{understand} signals rather than merely \emph{see} numbers, especially when data is scarce --- points toward a new paradigm for physiological signal modelling.

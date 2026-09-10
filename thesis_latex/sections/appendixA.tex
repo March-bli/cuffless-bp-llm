@@ -1,0 +1,44 @@
+\chapter{Reproducibility Checklist}
+\label{app:reproducibility}
+
+\section{Dataset and Split}
+
+\begin{itemize}
+  \item PulseDB (MIMIC + Vital subsets), complete dataset: 5,159 subject records, 5.23 million distinct segments;
+  \item 5,361 source .mat files (2,423 MIMIC + 2,938 Vital), Box multi-part download, 26 parts;
+  \item Segments de-duplicated on \texttt{filename\#segment\_index}; 319,361 duplicate rows (5.75\%) removed;
+  \item Strict 70/20/10 subject-level split, seed = 42: 3,611 training / 1,031 validation / 517 test subjects;
+  \item Calibration: first K chronological segments (not random); test: 5 subsequent segments;
+  \item Of the 517 test subjects, 460 have the $\geq$25 segments required by the K=20 protocol and are evaluated, giving $n = 2{,}300$ predictions.
+\end{itemize}
+
+\section{Model and Inference}
+
+\begin{itemize}
+  \item Qwen3-8B (HuggingFace), NVIDIA A100-80GB;
+  \item Thinking mode disabled (\texttt{enable\_thinking=False}), greedy decoding (\texttt{do\_sample=False}), max 64 new tokens;
+  \item Output parsing: match \texttt{SBP=}/\texttt{DBP=} labels preferentially;
+  \item Model loading: \texttt{.to("cuda")} (not \texttt{device\_map}, which requires \texttt{accelerate}).
+\end{itemize}
+
+\section{Experiment Protocols}
+
+\begin{itemize}
+  \item LLM few-shot ablation: K $\in \{1,3,5,10,20\}$, numeric and semantic;
+  \item Conventional ML: XGBoost global (15.7/8.89) + bias correction (K-ablation);
+  \item Semantic description: rule-based three-level mapping retaining quantitative values;
+  \item Semantic bottleneck: LLM qualitative summary then prediction (preliminary, 20 subjects);
+  \item Validation-set hyperparameter tuning: 9-combination grid search (3 max-depths $\times$ 3 learning rates).
+\end{itemize}
+
+\section{Reproducibility Confirmation}
+
+The core experiments were verified through two independent runs with identical results:
+
+\begin{itemize}
+  \item XGBoost global baseline: consistent (15.7/8.89);
+  \item LLM few-shot ablation (K=1/3/5/10/20): deterministic under greedy decoding and fixed seed;
+  \item XGBoost bias-correction K-ablation: deterministic.
+\end{itemize}
+
+All remaining experiments are deterministic: fixed random seeds, greedy decoding, and disabled thinking mode together guarantee reproducible outputs.

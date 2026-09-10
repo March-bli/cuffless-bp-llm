@@ -1,0 +1,42 @@
+# Data (download from PulseDB)
+data/
+output/
+*.npz
+*.npy
+*.mat
+
+# Models (download from HuggingFace)
+models/
+*.bin
+*.safetensors
+
+# Compiled / auxiliary LaTeX files
+thesis_latex/*.aux
+thesis_latex/*.bbl
+thesis_latex/*.blg
+thesis_latex/*.log
+thesis_latex/*.out
+thesis_latex/*.toc
+thesis_latex/*.lot
+thesis_latex/*.lof
+thesis_latex/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environment
+.venv/
+venv/
+.env
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Presentations and misc
+*.pptx
+demo.py
+.omc/

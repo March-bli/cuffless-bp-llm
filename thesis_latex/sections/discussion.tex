@@ -1,0 +1,35 @@
+\chapter{Discussion}
+\label{ch:discussion}
+
+\section{The LLM's Value: In-Context Learning Without Fine-Tuning}
+
+A central finding of this thesis is that the LLM provides genuine value in personalised BP estimation \emph{without any fine-tuning}. On the 517-subject test set, LLM numeric few-shot (5.99/3.32) outperforms conventional XGBoost bias correction (7.79/4.18), and semantic description (5.52/2.93) surpasses both. The LLM is pre-trained and ready to use: it adapts to an individual purely through in-context examples, requiring no gradient updates and no subject-specific model.
+
+This is in contrast to our earlier 20-subject pilot, where numeric few-shot appeared to underperform bias correction. The discrepancy highlights a methodological point: small test sets produce noisy rankings between methods, and a 517-subject evaluation is necessary for reliable conclusions.
+
+\section{Semantic Abstraction Helps Most When Calibration Is Scarce}
+
+The K-ablation reveals \emph{where} semantic description earns its advantage. At K=1, semantic description beats numeric few-shot by 4.4 mmHg on SBP (15.6 vs 19.9); at K=3, by 4.5 mmHg (8.2 vs 12.7); but at K=20 the gap closes to 0.5 mmHg. In other words, semantic description supplies the physiological prior that the LLM most needs when calibration data is scarce; once enough numeric examples are available, the LLM can infer the individual mapping by itself.
+
+This precisely locates the LLM's contribution in two complementary regimes: (1) with abundant calibration samples, in-context numeric learning alone already beats conventional baselines; (2) with scarce samples, semantic abstraction adds a substantial and interpretable improvement.
+
+\section{Why Conventional Bias Correction Is Strong}
+
+Bias correction remains a strong and sample-efficient baseline because the global XGBoost model already captures population-level patterns; the K calibration samples only need to correct a subject-specific offset. Its K-ablation is comparatively flat (9.09 at K=1 to 7.79 at K=20), reflecting that it estimates a constant shift rather than learning the individual mapping. This is precisely why it is eventually overtaken by the LLM, whose error falls from 19.9 at K=1 to 5.99 at K=20 --- the LLM learns, while bias correction only translates.
+
+\section{The Boundary of Semantic Abstraction}
+
+The contrast between semantic description (retaining quantitative anchors) and the semantic bottleneck (purely qualitative) delineates a clear boundary: language helps when it carries quantitative information, but harms when over-abstracted. This extends TimeSRL's semantic-bottleneck paradigm \citep{timesrl2026}: in classification tasks pure abstraction may suffice, but in precise regression tasks quantitative anchors are essential. This echoes the few-shot health learning paradigm \citep{fewshothealth2023}.
+
+\section{Implications for Wearable BP Monitoring}
+
+The results suggest a practical deployment strategy. At K=10, semantic description already reaches 5.84 mmHg SBP --- within 0.3 mmHg of its K=20 value --- so a moderate calibration burden of about ten measurements is sufficient to approach the best performance. The finding also motivates hybrid approaches: use bias correction for instant deployment, then switch to LLM semantic calibration as more samples accumulate.
+
+\section{Limitations}
+
+\begin{itemize}
+  \item Calibration samples require cuff measurements, a practical burden (mitigated by the observation that K=10 already approaches convergence);
+  \item Approximately 16--17\% of LLM outputs failed to parse in the expected format and were excluded as invalid predictions;
+  \item The semantic rules were hand-crafted rather than learned;
+  \item The dataset is ICU-derived, so transfer to healthy ambulatory populations requires further validation.
+\end{itemize}

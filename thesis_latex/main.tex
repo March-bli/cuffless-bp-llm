@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% USFD Academic Report Template
+% Prof. Roger K. Moore
+% University of Sheffield
+% 30 July 2018
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,oneside]{book}
+\usepackage[left=37mm,right=25mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[toc,page]{appendix}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{lipsum}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+\usepackage[normalem]{ulem}
+\usepackage{setspace}
+\usepackage{mathptmx}
+\usepackage{etoolbox}
+\AtBeginEnvironment{table}{\small}
+\AtBeginEnvironment{figure}{\small}
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\textit{\leftmark}}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\captionsetup[figure]{margin=1.5cm,font=small,labelfont={bf},name={Figure},labelsep=colon,textfont={it}}
+\captionsetup[table]{margin=1.5cm,font=small,labelfont={bf},name={Table},labelsep=colon}
+\onehalfspacing
+\frontmatter
+
+% -------------------------------------------------------------------
+% Title page
+% -------------------------------------------------------------------
+\begin{titlepage}
+
+\begin{center}
+{\LARGE University of Sheffield}\\[1.5cm]
+\linespread{1.2}\huge {\bfseries Novel Blood Pressure Monitoring Using Wearable Devices and Artificial Intelligence}\\[1.5cm]
+\linespread{1}
+\includegraphics[width=5cm]{images/tuoslogo.png}\\[1cm]
+{\Large Boyuan Li}\\[1cm]
+{\large \emph{Supervisor:} Dr.~Shaoxiong Sun}\\[1cm]
+\large A report submitted in partial fulfilment of the requirements\\ for the degree of MSc in Computer Science\\[0.3cm]
+\textit{in the}\\[0.3cm]
+Department of Computer Science\\[2cm]
+6 September 2026
+\end{center}
+
+\end{titlepage}
+
+% -------------------------------------------------------------------
+% Declaration
+% -------------------------------------------------------------------
+
+\newpage
+\section*{\Large Declaration}
+
+All sentences or passages quoted in this document from other people's work have been specifically acknowledged by clear cross-referencing to author, work and page(s).  Any illustrations that are not the work of the author of this report have been used with the explicit permission of the originator and are specifically acknowledged.  I understand that failure to do this amounts to plagiarism and will be considered grounds for failure.\\[1cm]
+
+\noindent Name: \textbf{Boyuan Li}\\[4mm]
+
+\noindent Signature:\\[1mm]
+\rule[1em]{25em}{0.5pt}
+
+\noindent Date: 6 September 2026\\[4mm]
+
+% -------------------------------------------------------------------
+% Abstract
+% -------------------------------------------------------------------
+
+\chapter*{Abstract}
+\input{sections/abstract.tex}
+
+% -------------------------------------------------------------------
+% Contents, list of figures, list of tables
+% -------------------------------------------------------------------
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% -------------------------------------------------------------------
+% Main sections
+% -------------------------------------------------------------------
+
+\mainmatter
+
+\input{sections/introduction.tex}
+\input{sections/background.tex}
+\input{sections/methodology.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusion.tex}
+
+% -------------------------------------------------------------------
+% Bibliography
+% -------------------------------------------------------------------
+
+\bibliographystyle{agsm}
+\bibliography{mybibliography}
+
+% -------------------------------------------------------------------
+% Appendices
+% -------------------------------------------------------------------
+
+\begin{appendices}
+\input{sections/appendixA.tex}
+\input{sections/appendixB.tex}
+\end{appendices}
+
+\end{document}
